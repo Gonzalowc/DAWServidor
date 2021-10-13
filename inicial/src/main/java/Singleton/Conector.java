@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conector {
-	private static Connection con = null;
+	public static Connection con = null;
 	private static final String conUrl = "jdbc:mariadb://localhost:3336/classicmodels?user=root&password=123456"
 			+ "&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
@@ -35,4 +35,14 @@ public class Conector {
 			System.err.println(e.getMessage());
 		}
 	}
+
+	public static Connection getCon() {
+		return con;
+	}
+
+	public static void setCon(Connection con) {
+		Conector.con = con;
+	}
+	
+	
 }

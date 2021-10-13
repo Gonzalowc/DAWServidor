@@ -1,0 +1,14 @@
+@charset "UTF-8";
+h1{
+	color: blue;
+}
+h2{
+	color: red;
+}
+h3{
+	color:green;
+}
+img{
+	width: 15px;
+	weight: 15px;
+}
