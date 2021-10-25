@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Confirmacion</title>
+<title>Confirmación</title>
 <%
 HttpSession sesion = request.getSession(false);
 String curso = null;
@@ -18,8 +18,6 @@ if (sesion != null) {
 		}
 	}
 }
-
-
 %>
 </head>
 Estos son tus datos: 
@@ -35,5 +33,14 @@ Modulos:
 <%=sesion.getAttribute("modulos")%><br/>
 <%}else{ %>No seleccionados<br/>
 <%} %>
+
+<br/>USUARIO BEAN<br/>
+<jsp:useBean id="userBean" scope="session" class="servidor.controller.Usuario"></jsp:useBean>
+
+Usuario <%=userBean.getUsuario() %>
+Nombre <%=userBean.getNombre() %>
+Correo <%=userBean.getCorreo() %>
+modulos <%=userBean.getModulos() %>
+objeto <%=userBean.toString() %>
 </body>
 </html>

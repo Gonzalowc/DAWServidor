@@ -1,6 +1,7 @@
 package servidor.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
@@ -45,18 +46,29 @@ public class Seleccionar extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession sesion = request.getSession(false);
 		if (sesion.getAttribute("usuario") != null) {
+			String usuario = request.getParameter("usuario");
 			String nombre = request.getParameter("nombre");
 			String apellidos = request.getParameter("apellidos");
 			String correo = request.getParameter("correo");
 			String curso = request.getParameter("curso");
 			String[] modulos = request.getParameterValues("modulos");
-			
 			sesion.setAttribute("nombre", nombre);
 			sesion.setAttribute("apellidos", apellidos);
 			sesion.setAttribute("correo", correo);
 			sesion.setAttribute("modulos",Arrays.toString(modulos));
 			Cookie cursoCookie = new Cookie("curso", curso);
 			response.addCookie(cursoCookie);
+			
+			Usuario user = new Usuario();
+			System.out.println(sesion.getAttribute("usuario")+" "+usuario);
+			user.setUsuario((String)sesion.getAttribute("usuario"));
+			user.setNombre(nombre);
+			user.setApellidos(apellidos);
+			user.setCorreo(correo);
+			user.setCurso(curso);
+			user.setModulos(new ArrayList<String>(Arrays.asList(modulos)));
+			System.out.println(user);
+			sesion.setAttribute("userBean",user);
 			response.sendRedirect("Confirmacion");
 		}else {
 			response.sendRedirect("LogOut");

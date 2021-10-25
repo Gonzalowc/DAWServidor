@@ -27,6 +27,8 @@ if (sesion != null) {
 </head>
 <body>
 <form method="post">
+<label for="usuario">Usuario</label>
+	<input type="text" name="usuario" id="usuario" value="<%=session.getAttribute("usuario")%>"><br/>
 	<label for="nombre">Nombre</label>
 	<input type="text" name="nombre" id="nombre" value="<%=nombre%>"><br/>
 	<label for="apellidos">Apellidos</label>

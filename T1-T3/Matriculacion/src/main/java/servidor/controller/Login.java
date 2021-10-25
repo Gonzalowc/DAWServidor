@@ -30,7 +30,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession sesion = request.getSession(false);
+		
 			request.getRequestDispatcher("matriculacion.jsp").forward(request, response);
 	}
 
@@ -42,6 +42,7 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
 		if (request.getParameter("enviar").equals("Entrar")) {
+			
 			String usuario = request.getParameter("usuario");
 
 			sesion.setAttribute("usuario", usuario);
