@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-<head th:replace="fragments/bootstrap::head(title='Alumnos')"></head>
+<head th:replace="fragments/bootstrap::head(title='list.alumn',extra='')"></head>
 <body>
 	<div class="container mt-5">
 		<div class="row mt-5 justify-content-center">
 			<header th:insert="fragments/parts::menu"></header>
 			<div class="row mt-3 justify-content-end">
-				<a class="text-center col-2 btn btn-primary" th:href="@{/alumnos/add}">Añadir Alumno</a>
+				<a class="text-center col-2 btn btn-primary" th:href="@{/alumnos/add}" th:text="#{menu.addAlumn}"></a>
 			</div>
-			<div class="col-9">
-				<h1 class="text-center">Lista de alumnos</h1>
+			<div class="col-12">
+				<h1 class="text-center" th:text="#{list.alumn}"></h1>
 				<table class="table table-stripped table-hover">
 					<thead class="table-light">
 						<tr>
 							<th>ID</th>
 							<th>NIF</th>
-							<th>Nombre</th>
-							<th>Primer Apellido</th>
-							<th>Segundo Apellido</th>
-							<th>Fecha de Nacimiento</th>
-							<th>Ciudad</th>
-							<th>Sexo</th>
+							<th th:text="#{name}"></th>
+							<th th:text="#{firstName}"></th>
+							<th th:text="#{secondName}"></th>
+							<th th:text="#{direction}"></th>
+							<th th:text="#{phoneNumber}"></th>
+							<th th:text="#{dateBirthady}"></th>
+							<th th:text="#{city}"></th>
+							<th th:text="#{sex}"></th>
+							<th></th>
 							<th></th>
 						</tr>
 					</thead>
@@ -30,20 +33,19 @@
 							<td th:text="${a.getNombre()}"></td>
 							<td th:text="${a.getApellido1()}"></td>
 							<td th:text="${a.getApellido2()}"></td>
+							<td th:text="${a.getDireccion()}"></td>
+							<td th:text="${a.getTelefono()}"></td>
 							<td th:text="${a.getFechaNacimiento()}"></td>
 							<td th:text="${a.getCiudad()}"></td>
 							<td th:text="${a.getSexo()}"></td>
-							<td>
-								<a th:href="@{'/alumnos/asignaturas?codigo='+${a.getId()}}"><i class="bi bi-journal-bookmark-fill"></i></a>
-								<a th:href="@{'/alumnos/edit?alumn='+${a.getId()}}"><i class="bi bi-pen-fill"></i></a>
-							</td>
-						
+							<td><a th:href="@{'/alumnos/asignaturas?codigo='+${a.getId()}}"><i class="bi bi-journal-bookmark-fill"></i></a></td>
+							<td><a th:href="@{'/alumnos/edit?alumn='+${a.getId()}}"><i class="bi bi-pen-fill"></i></a></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 
-			<footer th:replace="fragments/parts::footer(info='menu.students')"></footer>
+			<footer th:replace="fragments/parts::footer(info='list.alumn',extra='')"></footer>
 		</div>
 	</div>
 </body>

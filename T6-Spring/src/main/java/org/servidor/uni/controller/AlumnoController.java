@@ -51,18 +51,18 @@ public class AlumnoController {
 		}
 		
 		@GetMapping("/edit")
-		public String editProf(@RequestParam(name="alumn") String alumn,Model model) {
+		public String editAlumno(@RequestParam(name="alumn") String alumn,Model model) {
 			
-			Optional<Alumno> profesor = alumnoService.findAlumnoById(Long.parseLong(alumn));
-			model.addAttribute("alumno", profesor.get());
+			Optional<Alumno> alumno = alumnoService.findAlumnoById(Long.parseLong(alumn));
+			model.addAttribute("alumno", alumno.get());
 			return "editAlumno";
 		}
 		
 		
 		@PostMapping("/edit")
-		public String updateProf(@ModelAttribute Alumno alumn) {
-			if (alumnoService.actualizarAlumno(alumn)==null) {
-				return "redirect:/alumnos/edit?error=error&prof"+alumn.getId();
+		public String updateAlumno(@ModelAttribute Alumno alumno) {
+			if (alumnoService.actualizarAlumno(alumno)==null) {
+				return "redirect:/alumnos/edit?error=error&alumn="+alumno.getId();
 			}
 			return "redirect:/alumnos/";
 		}

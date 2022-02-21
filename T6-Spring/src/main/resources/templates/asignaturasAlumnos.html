@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/bootstrap::head(title='Asignaturas')"></head>
+<head th:replace="fragments/bootstrap::head(title='alumnOf',extra=${asignatura.nombre})"></head>
 <body>
 	<div class="container mt-5">
 		<div class="row mt-5 justify-content-center">
 			<header th:insert="fragments/parts::menu"></header>			
 			<div class="col-8">
-				<h4 class="text-center mt-3" th:text="'Alumnos de:'+ ${asignatura.getNombre()}"></h4>
+				<h4 class="text-center mt-3" th:text="|#{alumnOf}: ${asignatura.nombre}|"></h4>
 				<table class="table table-stripped table-hover mt-5">
 					<thead class="table-light">
 					<tr>
 						<th>ID</th>
 						<th>NIF</th>
-						<th>Nombre</th>
-						<th>Primer Apellido</th>
-						<th>Segundo Apellido</th>
-						<th>Fecha de Nacimiento</th>
-						<th>Ciudad</th>
-						<th>Sexo</th>
-						<th>Nota</th>
+						<th th:text="#{name}"></th>
+						<th th:text="#{firstName}"></th>
+						<th th:text="#{secondName}"></th>
+						<th th:text="#{dateBirthday}"></th>
+						<th th:text="#{city}"></th>
+						<th th:text="#{sex}"></th>
+						<th th:text="#{score}"></th>
 					</tr>
 					</thead>					
 					<tbody>
@@ -37,7 +37,7 @@
 				</table>
 			</div>
 
-			<footer th:replace="fragments/parts::footer(info='menu.students')"></footer>
+			<footer th:replace="fragments/parts::footer(info='alumnOf',extra='')"></footer>
 		</div>
 	</div>
 </body>

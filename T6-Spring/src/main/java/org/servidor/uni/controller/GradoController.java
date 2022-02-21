@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/grados")
 public class GradoController {
 
 	@Autowired
 	GradoServiceImp gradoService;
 	
-	@RequestMapping("/grados")
+	@RequestMapping("/")
 	public String grados(Model model) {
 		
 		List<Grado> grados = gradoService.getAllGrados();
@@ -31,7 +32,7 @@ public class GradoController {
 	}
 
 
-	@GetMapping("/grados/add")
+	@GetMapping("/add")
 	public String addGradoGet(@RequestParam(required=false,name="error") String error,
 			@RequestParam(required=false,name="grado") String nombre,
 			Model model) {
@@ -45,7 +46,7 @@ public class GradoController {
 	}
 	
 	
-	@PostMapping("/grados/add")
+	@PostMapping("/add")
 	public String addGradoPost(@ModelAttribute GradoDTO grado,Model model) {
 		
 		Grado gradoBD = new Grado();
@@ -58,18 +59,18 @@ public class GradoController {
 		return "redirect:/grados";
 	}
 	
-	@GetMapping("/grados/edit")
-	public String editGrado(@RequestParam(name="grado") String grado,Model model, @RequestParam(name="error") String error) {
+	@GetMapping("/edit")
+	public String editGrado(@RequestParam(name="grado") String grado, @RequestParam(name="error",required=false) String error, Model model) {
 		
 		
 		Optional<Grado> grad = gradoService.findGradoById(Long.parseLong(grado));
-		model.addAttribute("grado", grad);
+		model.addAttribute("grado", grad.get());
 		model.addAttribute("error", error);
 		return "editGrado";
 	}
 	
 	
-	@PostMapping("/grados/edit")
+	@PostMapping("/edit")
 	public String updateGrado(@ModelAttribute Grado grado) {
 		
 		if (gradoService.actualizarGrado(grado)==null) {

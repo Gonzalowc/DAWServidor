@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/bootstrap::head(title='Asignaturas del alumno')"></head>
+<head th:replace="fragments/bootstrap::head(title='matricula',extra=|${alumno.nombre} ${alumno.apellido1} ${apellido2}|)"></head>
 <body>
 	<div class="container mt-5">
 		<div class="row mt-5 justify-content-center">
 			<header th:insert="fragments/parts::menu"></header>			
 			<div class="col-8">
-				<h3 class="text-center mt-3" th:text="'Matricula de: '+${alumno.nombre}+' '+${alumno.apellido1}"></h3>
+				<h3 class="text-center mt-3" th:text="|#{matricula} ${alumno.nombre} ${alumno.apellido1} ${alumno.apellido2}|"></h3>
 				<table class="table table-stripped table-hover">
 					<thead class="table-light">
 					<tr>
 						<th>ID</th>
-						<th>Nombre</th>
-						<th>Creditos</th>
-						<th>Curso</th>
-						<th>Nota</th>
+						<th th:text="#{name}"></th>
+						<th th:text="#{credits}"></th>
+						<th th:text="#{course}"></th>
+						<th th:text="#{score}"></th>
 					</tr>
 					</thead>					
 					<tbody>
@@ -29,7 +29,7 @@
 				</table>
 			</div>
 
-			<footer th:replace="fragments/parts::footer(info='menu.subject')"></footer>
+			<footer th:replace="fragments/parts::footer(info='matricula',extra=|${alumno.nombre} ${alumno.apellido1} ${apellido2}|)"></footer>
 		</div>
 	</div>
 </body>

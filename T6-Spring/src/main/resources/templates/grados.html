@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/bootstrap::head(title='Grados')"></head>
+<head th:replace="fragments/bootstrap::head(title='list.grado',extra='')"></head>
 <body>
 	<div class="container mt-5">
 		<div class="row mt-5 justify-content-center">
@@ -8,13 +8,13 @@
 			<div class="row mt-3 justify-content-end">
 				<a class="text-center col-2 btn btn-primary" th:href="@{/grados/add}" th:text="#{menu.addgrados}">Añadir Grado</a>
 			</div>
-			<h1 class="text-center mt-3" th:text="#{menu.grados}"></h1>
+			<h1 class="text-center mt-3" th:text="#{list.grado}"></h1>
 			<div class="col-8">
 				<table class="table table-stripped table-hover">
 					<thead class="table-light">
 					<tr>
 						<th>ID</th>
-						<th>Nombre</th>
+						<th th:text="#{name}"></th>
 						<th></th>
 					</tr>
 					</thead>					
@@ -28,7 +28,7 @@
 				</table>
 			</div>
 
-			<footer th:replace="fragments/parts::footer(info='menu.grados')"></footer>
+			<footer th:replace="fragments/parts::footer(info='list.grado',extra='')"></footer>
 		</div>
 	</div>
 </body>

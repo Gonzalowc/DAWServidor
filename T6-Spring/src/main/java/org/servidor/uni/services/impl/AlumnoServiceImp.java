@@ -49,7 +49,9 @@ public class AlumnoServiceImp implements AlumnoService{
 	@Override
 	public Alumno actualizarAlumno(Alumno alumno) {
 		if(alumno !=null && alumno.getId()!=null) {
-			return alumnoRepo.save(alumno);
+			Alumno a = alumnoRepo.save(alumno);
+			System.out.println("Alumno"+a);
+			return a;
 		}
 		return null;
 	}

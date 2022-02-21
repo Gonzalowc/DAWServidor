@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/bootstrap::head(title='Asignaturas')"></head>
+<head th:replace="fragments/bootstrap::head(title='list.asignatura',extra='')"></head>
 <body>
 	<div class="container mt-5">
 		<div class="row mt-5 justify-content-center">
-			<header th:insert="fragments/parts::menu"></header>			
+			<header th:insert="fragments/parts::menu"></header>		
+			<div class="row mt-3 justify-content-end">
+				<a class="text-center col-2 btn btn-primary" th:href="@{/asignaturas/add}" th:text="#{menu.addSubject}"></a>
+			</div>	
 			<div class="col-8">
 				<table class="table table-stripped table-hover">
 					<thead class="table-light">
 					<tr>
 						<th>ID</th>
-						<th>Nombre</th>
-						<th>Creditos</th>
-						<th>Curso</th>
+						<th th:text="#{name}"></th>
+						<th th:text="#{credits}"></th>
+						<th th:text="#{course}"></th>
 						<th></th>
 					</tr>
 					</thead>					
@@ -28,7 +31,7 @@
 				</table>
 			</div>
 
-			<footer th:replace="fragments/parts::footer(info='menu.subjects')"></footer>
+			<footer th:replace="fragments/parts::footer(info='list.asignatura',extra='')"></footer>
 		</div>
 	</div>
 </body>
