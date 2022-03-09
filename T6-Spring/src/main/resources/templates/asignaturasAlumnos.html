@@ -23,21 +23,21 @@
 					</thead>					
 					<tbody>
 					 <tr th:each="a : ${asignatura.getAlumnosAsignatura()}">
-					 	<td th:text="${a.alumno.getId()}"></td>
-					 	<td th:text="${a.alumno.getNif()}"></td>
-					 	<td th:text="${a.alumno.getNombre()}"></td>
-					 	<td th:text="${a.alumno.getApellido1()}"></td>
-					 	<td th:text="${a.alumno.getApellido2()}"></td>
-					 	<td th:text="${a.alumno.getFechaNacimiento()}"></td>
-					 	<td th:text="${a.alumno.getCiudad()}"></td>
-					 	<td th:text="${a.alumno.getSexo()}"></td>
+					 	<td th:text="${a.alumno.id}"></td>
+					 	<td th:text="${a.alumno.nif}"></td>
+					 	<td th:text="${a.alumno.nombre}"></td>
+					 	<td th:text="${a.alumno.apellido1}"></td>
+					 	<td th:text="${a.alumno.apellido2}"></td>
+					 	<td th:text="${a.alumno.fechaNacimiento}"></td>
+					 	<td th:text="${a.alumno.ciudad}"></td>
+					 	<td th:text="${a.alumno.sexo}"></td>
 					 	<td th:text="${a.nota}"></td>					 	
 					 </tr>					
 					</tbody>
 				</table>
 			</div>
 
-			<footer th:replace="fragments/parts::footer(info='alumnOf',extra='')"></footer>
+			<footer th:replace="fragments/parts::footer(info='alumnOf',extra=${asignatura.nombre})"></footer>
 		</div>
 	</div>
 </body>

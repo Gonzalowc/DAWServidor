@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/bootstrap::head(title='list.department',extra='')"></head>
+<head th:replace="fragments/bootstrap::head(title='menu.departments',extra='')"></head>
 <body>
 	<div class="container mt-5">
 		<div class="row mt-5 justify-content-center">
@@ -8,13 +8,20 @@
 			<div class="row mt-3 justify-content-end">
 				<a class="text-center col-2 btn btn-primary" th:href="@{/departments/add}" th:text="#{menu.adddpto}"></a>
 			</div>
-			<h1 class="text-center mt-3" th:text="#{list.department}"></h1>
-			<div class="col-8">
+			<div th:if="${exito} != null" class="alert alert-success alert-dismissible fade show mt-5 d-flex" role="alert">
+  				<span th:text="#{${exito}}"></span>
+  				<button type="button" class="close justify-content-end" data-dismiss="alert" aria-label="Close" onClick="$('.alert').alert('close')">
+  					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<h1 class="text-center mt-3" th:text="#{menu.departments}"></h1>
+			<div class="col-4">
 				<table class="table table-stripped table-hover">
 					<thead class="table-light">
 					<tr>
 						<th>ID</th>
 						<th th:text="#{name}"></th>
+						<th></th>
 						<th></th>
 					</tr>
 					</thead>					
@@ -23,12 +30,13 @@
 					 	<td th:text="${d.getId()}"></td>
 					 	<td th:text="${d.getNombre()}"></td>
 					 	<td><a th:href="@{'/departments/edit?dpto='+${d.getId()}}"><i class="bi bi-pen-fill"></i></a></td>
+					 	<td><a th:href="@{'/departments/profesores?dpto='+${d.getId()}}"><i class="bi bi-eye-fill"></i></a>	</td>
 					 </tr>					
 					</tbody>
 				</table>
 			</div>
 
-			<footer th:replace="fragments/parts::footer(info='list.department',extra='')"></footer>
+			<footer th:replace="fragments/parts::footer(info='menu.departments',extra='')"></footer>
 		</div>
 	</div>
 </body>

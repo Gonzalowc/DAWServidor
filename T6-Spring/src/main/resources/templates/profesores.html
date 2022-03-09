@@ -7,6 +7,12 @@
 			<div class="row mt-3 justify-content-end">
 				<a class="text-center col-2 btn btn-primary" th:href="@{/profesores/add}" th:text="#{menu.addprofesor}"></a>
 			</div>
+			<div th:if="${exito} != null" class="alert alert-success alert-dismissible fade show mt-5 d-flex" role="alert">
+  				<span th:text="#{${exito}}"></span>
+  				<button type="button" class="close justify-content-end" data-dismiss="alert" aria-label="Close" onClick="$('.alert').alert('close')">
+  					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
 			<div class="col-11">
 				<h1 class="text-center" th:text="#{list.profesor}"></h1>
 				<table class="table table-stripped table-hover">
@@ -38,7 +44,7 @@
 							<td th:text="${p.getFechaNacimiento()}"></td>
 							<td th:text="${p.getCiudad()}"></td>
 							<td th:text="${p.getSexo()}"></td>
-							<td th:text="${p.getDepartamento().getNombre()}"></td>
+							<td th:text="${p.departamento!=null? p.departamento.nombre : ''}"></td>
 							<td><a th:href="@{'/profesores/edit?prof='+${p.getId()}}"><i class="bi bi-pen-fill"></i></a></td>
 						</tr>
 					</tbody>

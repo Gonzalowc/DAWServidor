@@ -6,6 +6,7 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -15,9 +16,8 @@ import org.servidor.uni.models.asignatura.Asignatura;
 
 @Entity
 @Table(name="alumno_se_matricula_asignatura")
+@IdClass(AlumnoAsignaturaId.class)
 public class AlumnoAsignatura implements Serializable{
-	
-	
 
 	@Id
 	@ManyToOne

@@ -14,51 +14,49 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.servidor.uni.models.AlumnoAsignatura;
-import org.servidor.uni.models.profesor.ProfesorDTO;
 
 @Entity
-@Table(name="alumno")
+@Table(name = "alumno")
 public class Alumno implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(unique=true,length=9,nullable=true)
+
+	@Column(unique = true, length = 9, nullable = true)
 	private String nif;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String nombre;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String apellido1;
-	
-	@Column(nullable=true)
+
+	@Column(nullable = true)
 	private String apellido2;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String ciudad;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String direccion;
-		
-	@Column(nullable=true)
+
+	@Column(nullable = true)
 	private String telefono;
-	
-	@Column(name="fecha_nacimiento",nullable=false)
+
+	@Column(name = "fecha_nacimiento", nullable = false)
 	private Date fechaNacimiento;
-	
-	@Column(nullable=false,length=1)
+
+	@Column(nullable = false, length = 1)
 	private String sexo;
-	
-	@OneToMany(mappedBy="alumno",cascade=CascadeType.ALL, orphanRemoval=true)
+
+	@OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<AlumnoAsignatura> alumnoAsignaturas = new HashSet<>();
-	
-	public Alumno() {}
+
+	public Alumno() {
+	}
 
 	public Alumno(AlumnoDTO alumnoDTO) {
 		this.nif = alumnoDTO.getNif();
@@ -72,6 +70,8 @@ public class Alumno implements Serializable {
 		this.sexo = alumnoDTO.getSexo();
 	}
 
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -151,15 +151,13 @@ public class Alumno implements Serializable {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	
-	
 
 	public Set<AlumnoAsignatura> getAlumnoAsignaturas() {
 		return alumnoAsignaturas;
 	}
 
-	public void setAlumnoAsignaturas(Set<AlumnoAsignatura> alumnoAsignatura) {
-		this.alumnoAsignaturas = alumnoAsignatura;
+	public void setAlumnoAsignaturas(Set<AlumnoAsignatura> alumnoAsignaturas) {
+		this.alumnoAsignaturas = alumnoAsignaturas;
 	}
 
 	@Override
@@ -186,6 +184,6 @@ public class Alumno implements Serializable {
 				+ ", fechaNacimiento=" + fechaNacimiento + ", sexo=" + sexo + ", alumnoAsignaturas=" + alumnoAsignaturas
 				+ "]";
 	}
-	
+
 	
 }

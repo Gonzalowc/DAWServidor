@@ -58,7 +58,7 @@ public class Profesor implements Serializable{
 	private String sexo;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_departamento")
+	@JoinColumn(name = "id_departamento", nullable=true)
 	private Departamento departamento;
 
 	@OneToMany(mappedBy="profesor", cascade = CascadeType.ALL,
@@ -67,18 +67,6 @@ public class Profesor implements Serializable{
 	
 	public Profesor() {
 		
-	}
-	public Profesor(ProfesorDTO profesorForm, Departamento dept) {		
-		this.nif = profesorForm.getNif();
-		this.apellido1 = profesorForm.getApellido1();
-		this.apellido2 = profesorForm.getApellido2();
-		this.nombre = profesorForm.getNombre();
-		this.ciudad = profesorForm.getCiudad();
-		this.departamento = dept;
-		this.direccion = profesorForm.getDireccion();
-		this.telefono = profesorForm.getTelefono();
-		this.fechaNacimiento = profesorForm.getFechaNacimiento();
-		this.sexo = profesorForm.getSexo();
 	}
 
 	public Long getId() {

@@ -6,7 +6,7 @@
 		<div class="row mt-5 justify-content-center">
 			<header th:insert="fragments/parts::menu"></header>
 			<div class="col-6">
-				<form th:action="@{/grados/add}" method="post"	th:object="${grado}">
+				<form th:action="@{/grados/addGrado}" method="post"	th:object="${grado}">
 					<label for="nombre" class="form-label mt-3" th:text="#{name}"></label>
 					<input type="text" class="form-control" id="nombre" name="nombre"
 						th:field="*{nombre}" required>						

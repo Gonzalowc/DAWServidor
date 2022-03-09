@@ -27,7 +27,7 @@ public class Departamento implements Serializable{
 	@Column(unique=true, nullable=false)
 	private String nombre;
 	
-	@OneToMany(mappedBy="id", cascade= CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy="departamento", cascade= CascadeType.ALL, orphanRemoval = true)
 	private Set<Profesor> profesores = new HashSet<>();
 	
 	public Departamento() {

@@ -52,7 +52,7 @@ public class Asignatura implements Serializable{
 	private Profesor profesor;
 	
 	@ManyToOne
-	@JoinColumn(name="id_grado")
+	@JoinColumn(name="id_grado", nullable=true)
 	private Grado grado;
 	
 	public Set<AlumnoAsignatura> getAlumnosAsignatura() {
@@ -158,6 +158,13 @@ public class Asignatura implements Serializable{
 		AlumnoAsignatura alumnoAsignatura = new AlumnoAsignatura(alumno, this);
 		alumno.getAlumnoAsignaturas().remove(alumnoAsignatura);
 		this.alumnosAsignatura.remove(alumnoAsignatura);
+	}
+
+	@Override
+	public String toString() {
+		return "Asignatura [id=" + id + ", nombre=" + nombre + ", creditos=" + creditos + ", tipo=" + tipo + ", curso="
+				+ curso + ", cuatrimestre=" + cuatrimestre + ", alumnosAsignatura=" + alumnosAsignatura + ", profesor="
+				+ profesor + ", grado=" + grado + "]";
 	}
 	
 }

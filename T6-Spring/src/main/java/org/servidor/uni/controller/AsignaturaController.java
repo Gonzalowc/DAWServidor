@@ -3,10 +3,12 @@ package org.servidor.uni.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.servidor.uni.models.alumno.Alumno;
 import org.servidor.uni.models.asignatura.Asignatura;
 import org.servidor.uni.models.asignatura.AsignaturaDTO;
 import org.servidor.uni.models.grado.Grado;
 import org.servidor.uni.models.profesor.Profesor;
+import org.servidor.uni.services.impl.AlumnoServiceImp;
 import org.servidor.uni.services.impl.AsignaturaServiceImp;
 import org.servidor.uni.services.impl.GradoServiceImp;
 import org.servidor.uni.services.impl.ProfesorServiceImp;
@@ -25,6 +27,9 @@ public class AsignaturaController {
 
 	@Autowired
 	AsignaturaServiceImp asignaturaService;
+	
+	@Autowired
+	AlumnoServiceImp alumnoService;
 	
 	@Autowired
 	ProfesorServiceImp profService;
@@ -107,5 +112,20 @@ public class AsignaturaController {
 			return "redirect:/asignaturas/edit?error=error&asig"+asig.getId();
 		}
 		return "redirect:/asignaturas/";
+	}
+	
+	@GetMapping("/alumnos/delete")
+	public String asignaturaAlumnoDelete(@RequestParam(required=true, name="asig") String asig,
+			@RequestParam(required=true, name="alumn") String alumn){
+		
+		Asignatura asignatura = asignaturaService.findAsignaturaById(Long.parseLong(asig)).get();
+		if(asignatura !=null) {
+			Alumno alumno = alumnoService.findAlumnoById(Long.parseLong(alumn)).get();				
+			asignatura.removeNota(alumno);
+			asignaturaService.actualizarAsignatura(asignatura);
+			return "redirect:/asignaturas/alumnos?codigo="+asig;
+		}else {
+			return "redirect:/asignaturas/";
+		}			
 	}
 }

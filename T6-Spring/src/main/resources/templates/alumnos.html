@@ -7,6 +7,13 @@
 			<div class="row mt-3 justify-content-end">
 				<a class="text-center col-2 btn btn-primary" th:href="@{/alumnos/add}" th:text="#{menu.addAlumn}"></a>
 			</div>
+			
+			<div th:if="${exito} != null" class="alert alert-success alert-dismissible fade show mt-5 d-flex" role="alert">
+  				<span th:text="#{${exito}}"></span>
+  				<button type="button" class="close justify-content-end" data-dismiss="alert" aria-label="Close" onClick="$('.alert').alert('close')">
+  					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
 			<div class="col-12">
 				<h1 class="text-center" th:text="#{list.alumn}"></h1>
 				<table class="table table-stripped table-hover">

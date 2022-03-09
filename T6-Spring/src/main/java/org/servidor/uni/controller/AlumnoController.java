@@ -5,10 +5,9 @@ import java.util.Optional;
 
 import org.servidor.uni.models.alumno.Alumno;
 import org.servidor.uni.models.alumno.AlumnoDTO;
-import org.servidor.uni.models.departamento.Departamento;
-import org.servidor.uni.models.profesor.Profesor;
-import org.servidor.uni.models.profesor.ProfesorDTO;
+import org.servidor.uni.models.asignatura.Asignatura;
 import org.servidor.uni.services.impl.AlumnoServiceImp;
+import org.servidor.uni.services.impl.AsignaturaServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +24,9 @@ public class AlumnoController {
 		@Autowired
 		AlumnoServiceImp alumnoService;
 		
+		@Autowired
+		AsignaturaServiceImp asignaturaService;
+		
 		@GetMapping("/")
 		public String alumnos(Model model) {
 			List<Alumno> alumnos = alumnoService.getAllAlumnos();
@@ -36,33 +38,42 @@ public class AlumnoController {
 		
 
 		@GetMapping("/asignaturas")
-		public String alumnosMatricula(@RequestParam(required = false, name = "codigo") String codigo, Model model) {
+		public String alumnosMatricula(@RequestParam(required = false, name = "codigo") String codigo, 
+				@RequestParam(required = false, name = "exito") String exito,
+				Model model) {
 
 			// Obtengo el parámetro de la URL (en caso de no esta vuelvo a la lista de
 			// asignaturas
 			if (codigo == null) {
 				return "redirect:/alumnos/";
 			}
-			
-			
 			Optional<Alumno> alumno = alumnoService.findAlumnoById(Long.parseLong(codigo));
-			model.addAttribute("alumno",alumno.get());		
+			model.addAttribute("alumno",alumno.get());
+			model.addAttribute("exito", exito);
 			return "alumnosAsignaturas";
 		}
 		
 		@GetMapping("/edit")
-		public String editAlumno(@RequestParam(name="alumn") String alumn,Model model) {
+		public String editAlumn(@RequestParam(name="alumn", required=true) String alumn,
+				@RequestParam(name="error", required=false) String error,
+				Model model) {
 			
 			Optional<Alumno> alumno = alumnoService.findAlumnoById(Long.parseLong(alumn));
-			model.addAttribute("alumno", alumno.get());
+			System.out.println(alumno.get().getAlumnoAsignaturas());
+			model.addAttribute("alumno",alumno.get());	
+			if(error!=null) {
+				model.addAttribute("error", error);
+			}
 			return "editAlumno";
 		}
 		
 		
 		@PostMapping("/edit")
-		public String updateAlumno(@ModelAttribute Alumno alumno) {
+		public String updateAlumn(@ModelAttribute Alumno alumno,Model model) {
+			System.out.println("Id del alumno: "+alumno.getId());
+			System.out.println("Asignaturas del alumno: "+alumno.getAlumnoAsignaturas().toString());
 			if (alumnoService.actualizarAlumno(alumno)==null) {
-				return "redirect:/alumnos/edit?error=error&alumn="+alumno.getId();
+				return "redirect:/alumnos/edit?error=error&alumn"+alumno.getId();
 			}
 			return "redirect:/alumnos/";
 		}
@@ -76,7 +87,6 @@ public class AlumnoController {
 			model.addAttribute("alumno", alumnoDTO);
 			model.addAttribute("error", error);
 			return "addAlumno";
-			
 		}
 		
 		@PostMapping("/add")
@@ -92,6 +102,20 @@ public class AlumnoController {
 			}else {
 				return "redirect:/alumnos/add?error=ExisteNif&alumno="+alumnoDTO.getNif();
 			}
+		}
+		
+		@GetMapping("/asignaturas/delete")
+		public String asignaturaAlumnoDelete(@RequestParam(required=true, name="asig") String asig,
+				@RequestParam(required=true, name="alumn") String alumn){
 			
+			Asignatura asignatura = asignaturaService.findAsignaturaById(Long.parseLong(asig)).get();
+			if(asignatura !=null) {
+				Alumno alumno = alumnoService.findAlumnoById(Long.parseLong(alumn)).get();				
+				asignatura.removeNota(alumno);
+				asignaturaService.actualizarAsignatura(asignatura);
+				return "redirect:/alumnos/asignaturas?codigo="+alumn+"&exito=delAsigAlum";
+			}else {
+				return "redirect:/alumnos/";
+			}			
 		}
 }

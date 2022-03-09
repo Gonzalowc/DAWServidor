@@ -40,12 +40,22 @@
 						<option value="M">Mujer</option>
 					</select>
 					<label for="departamento"th:text="#{department}"></label>
-					<select name="departamento" class="form-select mt-3">
+					<select name="departamento" th:if="*{departamento} != null" class="form-select mt-3" >
+	                            <option
+	                            value=""
+	                            th:text="|Seleccione un departamento|"></option>
 	                            <option th:each="d : ${departamentos}" 
 	                            th:value="${d.id}" 
-	                            th:text="${d.nombre}" 
-	                            th:field="*{departamento}" 
+	                            th:text="${d.nombre}"
 	                            th:selected="(${d.id} == *{departamento.id})"></option>
+					</select>
+					<select th:field="*{departamento}" th:if="*{departamento} == null"  class="form-select mt-3">
+	                            <option
+	                            value=""
+	                            th:text="|Seleccione un departamento|"></option>
+	                            <option th:each="d : ${departamentos}" 
+	                            th:value="${d.id}" 
+	                            th:text="${d.nombre}"></option>
 					</select>
 					<h6 class="text-danger" th:if="${error!=null}" th:text="${'errorProfesor'}"></h6>	
 					<button type="submit" class="btn btn-primary w-100 mt-3" th:text="#{update}" ></button>
